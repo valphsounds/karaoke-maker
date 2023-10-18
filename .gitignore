@@ -1,2 +1,4 @@
 .env
 /app/node_modules
+/app/midi/*
+/app/views/uploads/*
