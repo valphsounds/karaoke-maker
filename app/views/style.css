@@ -1,0 +1,87 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#timeLine {
+    width: 100%;
+    overflow: hidden;
+}
+
+#songRange {
+    width: 1000%;
+    position: relative;
+    left: 0%;
+    transition: 300ms left linear;
+}
+
+#lyricPos {
+    width: 1000%;
+    height: 20px;
+    position: relative;
+    left: 0%;
+    transition: 300ms left linear;
+}
+
+.markers {
+    width: 3px;
+    height: 20px;
+    position: absolute;
+    cursor: ew-resize;
+}
+
+#line {
+    display: block;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+}
+
+#nxtLine {
+    display: block;
+    width: fit-content;
+    position: absolute;
+    top: 56%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+#lyricArea {
+    position: absolute;
+    width: 50%;
+    bottom: 5%;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+#lyricBox {
+    width: 98%;
+    margin-left: 1%;
+    display: block;
+    text-align: center;
+    color: #000;
+    overflow: hidden;
+    resize: vertical;
+    min-height: 40px;
+    line-height: 20px;
+    max-height: 79.6vh;
+    overflow-y: scroll;
+}
+
+#btns {
+    width: fit-content;
+    display: block;
+    margin: 5px auto;
+}
+
+i {
+    pointer-events: none;
+}
+
+.pointer:hover {
+    cursor: pointer;
+}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./css/tailwind.css">
+    <script src="https://kit.fontawesome.com/7c1d3a698f.js" crossorigin="anonymous"></script>
+    <title>KaraokeMaker</title>
+</head>
+<body data-theme class="bg-violet-200">
+    <div class="flex justify-center w-full my-2">
+        <select data-theme class="px-2 border border-violet-500 text-violet-100 rounded-xl bg-violet-700" name="songList" id="songList">
+                <option value="">---Choose song---</option>
+            <% songList.forEach( song => { %>
+                <option value="<%= song.fileName %>"><%= song.name %></option>
+            <% }) %>
+        </select>
+    </div>
+    <audio id="songPlayer" src=""></audio>
+    <div id="timeLine" class="mb-3">
+        <div id="lyricPos">
+        </div>
+        <input data-theme class="accent-violet-800 bg-violet-100 border-violet-500 border-2 rounded-md" id="songRange" type="range" step="0.025" value="0" hidden />
+        <button data-theme id="leftBtn" class="absolute left-2 px-1 rounded-lg bg-violet-700 text-violet-100 hover:bg-violet-500" hidden><i class="fa-solid fa-arrow-left"></i></button>
+        <button data-theme id="rightBtn" class="absolute right-2 px-1 rounded-lg bg-violet-700 text-violet-100 hover:bg-violet-500" hidden><i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+    <p id="line" data-theme class="text-5xl text-violet-800"></p>
+    <p id="nxtLine" data-theme class="text-3xl text-violet-800"></p>
+    <br />
+    <div id="lyricArea">
+        <div id="btns">
+            <button title="Play" data-theme class="p-3 w-14 text-center rounded-xl bg-violet-700 hover:bg-violet-500 text-violet-100" id="playBtn"><i class="fa-solid fa-play"></i></button>
+            <button title="Record" data-theme class="p-3 w-14 text-center rounded-xl bg-violet-700 hover:bg-violet-500 text-violet-100" id="recBtn"><i class="fa-solid fa-circle"></i></button>
+            <button title="Stop" data-theme class="p-3 w-14 text-center rounded-xl bg-violet-700 hover:bg-violet-500 text-violet-100" id="stopBtn"><i class="fa-solid fa-stop"></i></button>
+            <button title="Save Timing" data-theme class="p-3 w-14 text-center rounded-xl bg-violet-700 hover:bg-violet-500 text-violet-100" id="saveBtn"><i class="fa-solid fa-floppy-disk"></i></button>
+            <button title="Download MIDI" data-theme class="p-3 w-14 text-center rounded-xl bg-violet-700 hover:bg-violet-500 text-violet-100" id="getMidiBtn"><i class="fa-solid fa-file-arrow-down"></i></button>
+        </div>
+    </div>
+    <div id="songOpen" data-theme class="transition-all duration-300 ease-linear -translate-x-full w-1/4 bg-violet-400 rounded-r-lg absolute top-0 max-h-screen">
+        <form data-theme class="mb-5 w-full flex flex-wrap p-4 bg-violet-500 rounded-tr-xl" id="fileUploadForm" action="upload-file" enctype="multipart/form-data" method="POST">
+            <legend data-theme class="text-violet-100">Add Song</legend><br />
+            <input type="file" data-theme class="admin__input pointer text-violet-800 mw-200 bg-violet-300 rounded-xl mb-2 file:px-2 file:rounded-xl file:bg-violet-700 file:text-violet-100 file:border-none file:hover:bg-violet-600" id="myFile" name="myFile" /><br />
+            <input type="text" data-theme class="admin__input pointer w-400 px-2 border border-violet-600 text-violet-100 rounded-xl bg-violet-300 placeholder:text-violet-600" id="songName" name="songName" placeholder="Write song name..." />
+            <input data-theme class="admin__submit px-2 rounded-xl bg-violet-700 hover:bg-violet-600 text-violet-100" type="submit" value="Upload" />
+        </form>
+        <h3 data-theme class="ml-2 text-violet-50">Lyrics</h3>
+        <textarea name="lyricbox" id="lyricBox" data-theme class="resize-ta bg-violet-100 border-violet-500 border-2 rounded-2xl ml-1 mb-2" cols="30" rows="10"></textarea>
+        <button data-theme class="ml-1 px-2 rounded-xl mb-2 bg-violet-700 hover:bg-violet-600 text-violet-100" id="saveLyricsBtn">Save Lyrics</button>
+        <button data-theme class="ml-1 px-2 rounded-xl mb-2 bg-violet-700 hover:bg-violet-600 text-violet-100" id="editLyricsBtn">Edit Lyrics</button>
+        <button id="songOpenBtn" data-theme class="transition-all duration-300 ease-linear w-full translate-x-20 text-right px-2 rounded-xl rounded-l-none bg-violet-700 text-violet-100 hover:bg-violet-600">Menu <i class="fa-solid fa-angle-right"></i></button>
+    </div>
+    <select data-theme class="px-2 border border-violet-500 text-violet-100 rounded-xl bg-violet-700 absolute bottom-3 left-1/2 -translate-x-1/2" name="themeSel" id="themeSel">
+        <option value="">---Choose Theme ---</option>
+        <option value="red">Red</option>
+        <option value="orange">Orange</option>
+        <option value="lime">Lime</option>
+        <option value="emerald">Emerald</option>
+        <option value="teal">Teal</option>
+        <option value="sky">Sky</option>
+        <option value="blue">Blue</option>
+        <option value="violet">Violet</option>
+        <option value="fuchsia">Fuchsia</option>
+        <option value="rose">Rose</option>
+    </select>
+    <p id="notification" class="absolute bottom-2 right-2 bg-emerald-600 rounded-xl block text-slate-100 px-2 opacity-0">Success!</p>
+    <script src="main.js"></script>
+</body>
+</html>
