@@ -3,3 +3,4 @@
 /app/midi/*
 /app/views/uploads/*
 /app/views/css/tailwind.css
+.DS_Store
