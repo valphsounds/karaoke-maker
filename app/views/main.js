@@ -414,8 +414,8 @@ function makeLineMarkers() {
         for (let j = 0; j < songLyrics[i].line.length; j++) {
             let wordDiv = document.createElement('div');
             wordDiv.classList.add('markers');
-            wordDiv.classList.add('h-1');
-            wordDiv.classList.add('w-5');
+            wordDiv.classList.add('w-1');
+            wordDiv.classList.add('h-5');
             wordDiv.classList.add('absolute');
             wordDiv.classList.add('cursor-ew-resize');
             wordDiv.classList.add('wordMarkers');
