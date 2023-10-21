@@ -13,6 +13,7 @@
   "dependencies": {
     "@tonejs/midi": "^2.0.28",
     "body-parser": "^1.20.2",
+    "caniuse-lite": "^1.0.30001551",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "ejs": "^3.1.9",
