@@ -98,6 +98,7 @@ menuBtns.saveLyrics.addEventListener('click', () => {
 
 menuBtns.editLyrics.addEventListener('click', () => {
     let content = "";
+    console.log(songLyrics);
     for( let i = 0; i < songLyrics.length; i++ ) {
         let line = "";
         for( let j = 0; j < songLyrics[i].line.length; j++ ) {
@@ -298,7 +299,6 @@ window.addEventListener('keydown', (e) => {
 })
 
 // Theme selector
-const themeElements = document.querySelectorAll('[data-theme]');
 let currentTheme = 'violet';
 
 themeSel.addEventListener('change', (e) => {
@@ -312,7 +312,7 @@ themeSel.addEventListener('change', (e) => {
 })
 
 function changeTheme(theme) {
-    themeElements.forEach(elm => {
+    document.querySelectorAll('[data-theme]').forEach(elm => {
         let newClassList = [];
         elm.classList.forEach(c => {
             if(c.includes(currentTheme)) {
@@ -375,6 +375,7 @@ function placeLyrics() {
         //Main Line
         if(i < songLyrics[lineCnt].line.length) {
             let em = document.createElement('em');
+            em.setAttribute('data-theme', '');
             em.classList.add('words');
     
             if(i + 1 === songLyrics[lineCnt].line.length) {

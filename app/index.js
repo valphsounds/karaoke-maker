@@ -76,7 +76,7 @@ app.put("/api/updateLyrics", async (req, res) => {
 });
 
 app.get('/api/getLyrics/:songId', async (req, res) => {
-    let song = await Song.findById(req.body.songId);
+    let song = await Song.findById(req.params.songId);
     if(!song) return res.status(404);
     res.send(song.lyrics);
 })
