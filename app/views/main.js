@@ -37,9 +37,9 @@ window.addEventListener('load', () => {
 // Choose song
 songList.addEventListener('change', async () => {
     songPlayer.src = `./uploads/${songList.value}`;
-    const songName = songList.value.replace('.mp3', '');
+    const id = songList.selectedOptions[0].dataset.songId;
     lyricPos.innerText = "";
-    fetchGetLyrics(songName);
+    fetchGetLyrics(id);
     songList.blur();
 })
 
@@ -90,8 +90,8 @@ menuBtns.saveLyrics.addEventListener('click', () => {
             timing: null
         });
     }
-    const name = songList.value.replace('.mp3', '');
-    fetchPutLyrics(name, songLyrics);
+    const id = songList.selectedOptions[0].dataset.songId;
+    fetchPutLyrics(id, songLyrics);
     lyricBox.value = "";
     textarea.style.height = calcHeight(textarea.value) + "px";
 })
@@ -131,8 +131,8 @@ songPlayer.addEventListener('pause', () => {
 songPlayer.addEventListener('ended', () => {
     clearInterval(timer);
     if(isRecording) {
-        const name = songList.value.replace('.mp3', '');
-        fetchPutLyrics(name, songLyrics);
+        const id = songList.selectedOptions[0].dataset.songId;
+        fetchPutLyrics(id, songLyrics);
         isRecording = false;
     }
 })
@@ -247,8 +247,8 @@ ctrlBtns.stop.addEventListener('click', () => {
     songPlayer.pause();
     clearInterval(timer);
     if(isRecording) {
-        const name = songList.value.replace('.mp3', '');
-        fetchPutLyrics(name, songLyrics);
+        const id = songList.selectedOptions[0].dataset.songId;
+        fetchPutLyrics(id, songLyrics);
         isRecording = false;
     }
 })
@@ -264,13 +264,13 @@ ctrlBtns.stop.addEventListener('dblclick', () => {
 })
 
 ctrlBtns.save.addEventListener('click', () => {
-    const name = songList.value.replace('.mp3', '');
-    fetchPutLyrics(name, songLyrics);
+    const id = songList.selectedOptions[0].dataset.songId;
+    fetchPutLyrics(id, songLyrics);
 })
 
 ctrlBtns.getMidi.addEventListener('click', async () => {
-    const songName = songList.value.replace('.mp3', '');
-    fetchGetMidiFile(songName);
+    const id = songList.selectedOptions[0].dataset.songId;
+    fetchGetMidiFile(id);
 })
 
 // Space listener
@@ -524,8 +524,8 @@ function formDataFromForm(form){
 }
 
 // Fetch API content
-function fetchGetLyrics(songName) {
-    fetch(`/api/getLyrics/${songName}`, {
+function fetchGetLyrics(id) {
+    fetch(`/api/getLyrics/${id}`, {
         method: 'GET'
     })
     .then(async response => {
@@ -583,9 +583,9 @@ function postData(data, URL){
     });
 }
 
-function fetchPutLyrics(songName, lyrics) {
+function fetchPutLyrics(id, lyrics) {
     const reqObj = {
-        songName: songName,
+        songId: id,
         lyrics: lyrics
     };
     const jsonObj = JSON.stringify(reqObj);
@@ -621,8 +621,8 @@ function fetchPutLyrics(songName, lyrics) {
     });
 }
 
-function fetchGetMidiFile(songName) {
-    fetch(`/api/midiFile/${songName}`, {
+function fetchGetMidiFile(songId) {
+    fetch(`/api/midiFile/${songId}`, {
         method: 'GET'
     })
     .then( res => res.blob() )

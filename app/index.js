@@ -53,11 +53,11 @@ app.get("/api/getFiles", async (req, res) => {
   });
 
 app.post("/api/uploadFile", upload.single("myFile"), async (req, res) => {
-    fs.renameSync(`./views/uploads/${req.file.filename}`, `./views/uploads/${req.body.songName}.mp3`);
+    fs.renameSync(`./views/uploads/${req.file.filename}`, `./views/uploads/${req.file.originalname}`);
     try {
         const newFile = await Song.create({
           name: req.body.songName,
-          fileName: `${req.body.songName}.mp3`,
+          fileName: req.file.originalname,
         });
         res.status(200).send('OK!');
       } catch (error) {
@@ -68,21 +68,22 @@ app.post("/api/uploadFile", upload.single("myFile"), async (req, res) => {
 });
 
 app.put("/api/updateLyrics", async (req, res) => {
-    let song = await Song.findOne({ name: req.body.songName });
+    let song = await Song.findById(req.body.songId);
     song.lyrics = req.body.lyrics;
-    await Song.replaceOne({ name: req.body.songName }, song);
+    await Song.replaceOne({ _id: req.body.songId }, song);
 
     res.send(song);
 });
 
-app.get('/api/getLyrics/:songName', async (req, res) => {
-    const song = await Song.findOne({ name: req.params.songName });
+app.get('/api/getLyrics/:songId', async (req, res) => {
+    let song = await Song.findById(req.body.songId);
     if(!song) return res.status(404);
     res.send(song.lyrics);
 })
 
-app.get('/api/midiFile/:songName', async (req, res) => {
-    const song = await Song.findOne({ name: req.params.songName });
+app.get('/api/midiFile/:songId', async (req, res) => {
+    let song = await Song.findById(req.params.songId);
+
     if(!song) return res.status(404);
 
     let midi = new Midi();

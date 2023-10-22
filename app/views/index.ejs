@@ -13,7 +13,7 @@
         <select data-theme class="px-2 border border-violet-500 text-violet-100 rounded-xl bg-violet-700" name="songList" id="songList">
                 <option value="">---Choose song---</option>
             <% songList.forEach( song => { %>
-                <option value="<%= song.fileName %>"><%= song.name %></option>
+                <option data-song-id="<%= song._id %>" value="<%= song.fileName %>"><%= song.name %></option>
             <% }) %>
         </select>
     </div>
